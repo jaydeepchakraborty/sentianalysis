@@ -34,7 +34,7 @@ search_box_elmnt.clear()
 #iamsafe
 #safety
 #safety check
-search_box_elmnt.send_keys("safety check")
+search_box_elmnt.send_keys("marked safe")
 
 search_box_btn_elmnt = WebDriverWait(driver, 30).until(lambda driver: driver.find_element_by_xpath(fbsearch_btn))
 
@@ -43,30 +43,25 @@ search_box_btn_elmnt.click()
 WebDriverWait(driver, 30)
 
 
-# while (1):
-#     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-#     if driver.find_element_by_xpath("//div[@class='phm _64f']").text != 'End of Results':
-#         break
-#     try:
-#         driver.find_element_by_xpath("//div[@class='phm _64f']")
-#     except:
-#         continue
-
 
 
 while True:
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     try:
-        if driver.find_element_by_xpath("//div[@class='phm _64f']").text != 'End of Results':
+        if WebDriverWait(driver, 3).until(lambda driver: driver.find_element_by_xpath("//div[@class='phm _64f']")).text == 'End of Results':
+            print("scrolling done")
             break
     except:
         pass
 
-search_val_lst = []
+
 
 search_vals = driver.find_elements_by_xpath("//span[@class = 'highlightNode']/parent::p")
 
-for search_val in search_vals:
-    search_val_lst.append(search_val.text)
+file = open("fb_posts.txt", "w", encoding='utf-8')
 
-print(search_val_lst)
+for search_val in search_vals:
+    file.write(str(search_val.text)+"\n")
+    file.write("--------------------------------------------------------------------------------------------\n")
+
+file.close()
