@@ -33,8 +33,8 @@ chromedriver = "/usr/local/bin/chromedriver"
 os.environ["webdriver.chrome.driver"] = chromedriver
 driver = webdriver.Chrome(chromedriver)
 driver.get("https://twitter.com/?lang=en")
-t_usr_nm = ""
-t_pwd = ""
+t_usr_nm = "jaydeep.chakraborty.1988@gmail.com"
+t_pwd = "jaytwitterdeep"
 email_field_xpath = "//input[@class='text-input email-input js-signin-email']"
 pwd_field_xpath = "//input[@class='text-input']"
 home_login_btn_xpath = "//a[@href='/login']"
@@ -91,3 +91,4 @@ for search_val in search_vals:
     file.write("--------------------------------------------------------------------------------------------\n")
 
 file.close()
+driver.close()

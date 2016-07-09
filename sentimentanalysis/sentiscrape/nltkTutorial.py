@@ -195,7 +195,7 @@ classifier = nltk.NaiveBayesClassifier.train(training_set)
 # contains(friend) = False       negati : positi =      1.2 : 1.0
 # contains(horrible) = False     positi : negati =      1.2 : 1.0
 
-tweet = 'Larry is my friend'
+pos_tweet = 'Larry is my friend'
 #print(extract_features(tweet.split()))
 # {'contains(amazing)': False, 'contains(morning)': False, 
 # 'contains(love)': False, 'contains(great)': False, 
@@ -209,10 +209,11 @@ tweet = 'Larry is my friend'
 # 'contains(the)': False, 'contains(forward)': False, 
 # 'contains(feel)': False}
 
-print(classifier.classify(extract_features(tweet.split())))
+senti_result = classifier.classify(extract_features(pos_tweet.split()))#positive
+print(senti_result)
 
-tweet = "I do not like that man."
-print(classifier.classify(extract_features(tweet.split())))
+neg_tweet = "I do not like that man."
+print(classifier.classify(extract_features(neg_tweet.split())))#negative
 
 
 
@@ -223,6 +224,7 @@ from sklearn.naive_bayes import MultinomialNB,GaussianNB,BernoulliNB
 
 MNB_classifier = SklearnClassifier(MultinomialNB())
 MNB_classifier.train(training_set)
+print(MNB_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("Multinomial Algo accuracy percent:",nltk.classify.accuracy(MNB_classifier,testing_set)*100)
 
 #not working for gaussian
@@ -232,6 +234,7 @@ print("Multinomial Algo accuracy percent:",nltk.classify.accuracy(MNB_classifier
 
 bernoulli_classifier = SklearnClassifier(BernoulliNB())
 bernoulli_classifier.train(training_set)
+print(bernoulli_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("Bernoulli Algo accuracy percent:",nltk.classify.accuracy(bernoulli_classifier,testing_set)*100)
 
 
@@ -239,27 +242,33 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 
 logistic_classifier = SklearnClassifier(LogisticRegression())
 logistic_classifier.train(training_set)
+print(logistic_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("Logistic Reg Algo accuracy percent:",nltk.classify.accuracy(logistic_classifier,testing_set)*100)
 
 SGD_classifier = SklearnClassifier(SGDClassifier())
 SGD_classifier.train(training_set)
+print(SGD_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("SGD Algo accuracy percent:",nltk.classify.accuracy(SGD_classifier,testing_set)*100)
 
 from sklearn.svm import SVC,LinearSVC,SVR, LinearSVR 
 svc_classifier = SklearnClassifier(SVC())
 svc_classifier.train(training_set)
+print(svc_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("SVC Algo accuracy percent:",nltk.classify.accuracy(svc_classifier,testing_set)*100)
 
 lsvc_classifier = SklearnClassifier(LinearSVC())
 lsvc_classifier.train(training_set)
+print(lsvc_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("LinearSVC Algo accuracy percent:",nltk.classify.accuracy(lsvc_classifier,testing_set)*100)
 
 
 svr_classifier = SklearnClassifier(SVR())
 svr_classifier.train(training_set)
+print(svr_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("SVR Algo accuracy percent:",nltk.classify.accuracy(svr_classifier,testing_set)*100)
 
 lsvr_classifier = SklearnClassifier(LinearSVR())
 lsvr_classifier.train(training_set)
+print(lsvr_classifier.classify(extract_features(pos_tweet.split())))#positive
 print("LinearSVR Algo accuracy percent:",nltk.classify.accuracy(lsvr_classifier,testing_set)*100)
 
