@@ -209,116 +209,28 @@ pos_tweet = 'Larry is my friend'
 # 'contains(the)': False, 'contains(forward)': False, 
 # 'contains(feel)': False}
 
+
 senti_result = classifier.classify(extract_features(pos_tweet.split()))#positive
 print(senti_result)
 
 neg_tweet = "I do not like that man."
 print(classifier.classify(extract_features(neg_tweet.split())))#negative
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+from collections import defaultdict
+refsets = defaultdict(set)
+testsets = defaultdict(set)
+for i, (feats, label) in enumerate(test_tweets):
+    refsets[label].add(i)
+    observed = classifier.classify(extract_features(feats))
+    testsets[observed].add(i)
+
+from nltk.metrics.scores import precision,recall,f_measure
+print('pos precision:', precision(refsets['positive'], testsets['positive']))
+print('pos recall:', recall(refsets['positive'], testsets['positive']))
+print('pos F-measure:', f_measure(refsets['positive'], testsets['positive']))
+print('neg precision:', precision(refsets['negative'], testsets['negative']))
+print('neg recall:', recall(refsets['negative'], testsets['negative']))
+print('neg F-measure:', f_measure(refsets['negative'], testsets['negative']))
 
 
 
