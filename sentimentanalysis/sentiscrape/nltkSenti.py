@@ -224,7 +224,7 @@ for i, (feats, label) in enumerate(test_tweets):
     observed = classifier.classify(extract_features(feats))
     testsets[observed].add(i)
 
-
+testing_set = nltk.classify.apply_features(extract_features, test_tweets)
 from nltk.metrics.scores import precision,recall,f_measure
 print('pos precision:', precision(refsets['positive'], testsets['positive']))
 print('pos recall:', recall(refsets['positive'], testsets['positive']))
@@ -232,10 +232,11 @@ print('pos F-measure:', f_measure(refsets['positive'], testsets['positive']))
 print('neg precision:', precision(refsets['negative'], testsets['negative']))
 print('neg recall:', recall(refsets['negative'], testsets['negative']))
 print('neg F-measure:', f_measure(refsets['negative'], testsets['negative']))
+print('accuracy ', nltk.classify.accuracy(classifier,testing_set)*100)
 
 
 
-testing_set = nltk.classify.apply_features(extract_features, test_tweets)
+
 from nltk.classify.scikitlearn import SklearnClassifier
 from sklearn.naive_bayes import MultinomialNB,GaussianNB,BernoulliNB
 

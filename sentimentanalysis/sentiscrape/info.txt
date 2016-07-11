@@ -22,3 +22,7 @@ What percent of the positive cases did you catch?
 the "recall" was 60 out of 100 = 60%
 What percent of positive predictions were correct? 
 the "precision" was 60 out of 200 = 30%
+
+
+Problem statements:
+1) feature extraction algorithm
