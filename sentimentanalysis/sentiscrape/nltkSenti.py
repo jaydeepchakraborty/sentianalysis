@@ -224,6 +224,7 @@ for i, (feats, label) in enumerate(test_tweets):
     observed = classifier.classify(extract_features(feats))
     testsets[observed].add(i)
 
+
 from nltk.metrics.scores import precision,recall,f_measure
 print('pos precision:', precision(refsets['positive'], testsets['positive']))
 print('pos recall:', recall(refsets['positive'], testsets['positive']))

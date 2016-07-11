@@ -1,5 +1,5 @@
-# file_name = "pos.txt"
-file_name = "neg.txt"
+file_name = "pos.txt"
+# file_name = "neg.txt"
 
 arrays = []
 with open(file_name, "r", encoding='utf-8') as f:
