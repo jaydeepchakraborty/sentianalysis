@@ -26,3 +26,4 @@ the "precision" was 60 out of 200 = 30%
 
 Problem statements:
 1) feature extraction algorithm
+2) how nltk.classify.apply_features is working and what is the output

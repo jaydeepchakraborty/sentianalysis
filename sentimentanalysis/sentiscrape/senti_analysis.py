@@ -4,8 +4,19 @@ pos_file_name = "pos.txt"
 neg_file_name = "neg.txt"
 test_file_name_fb = "fb_posts.txt"
 test_file_name_twitter = "twitter_posts.txt"
+stop_word_file_name = "stopword"
+feture_file_name = "fetures.txt"
 
 import nltk
+from nltk.corpus import stopwords
+stop_words = stopwords.words('english')
+with open(stop_word_file_name, "r", encoding='utf-8') as f:
+    for line in f:
+        line = line.replace('\n','')
+        stop_words.append(line)
+
+f.close()
+
 
 train_mark_safe = []
 with open(pos_file_name, "r", encoding='utf-8') as f:
@@ -54,7 +65,8 @@ f.close()
 def get_words_in_tweets(tweets):
     all_words = []
     for (words, sentiment) in tweets:
-        all_words.extend(words)
+        filtered_words = [w for w in words if not w in stop_words]
+        all_words.extend(filtered_words)
     return all_words
 
 def get_word_features(wordlist):
