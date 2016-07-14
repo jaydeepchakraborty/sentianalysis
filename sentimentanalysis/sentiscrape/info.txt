@@ -24,6 +24,8 @@ What percent of positive predictions were correct?
 the "precision" was 60 out of 200 = 30%
 
 
+70% for the training set and 30% for the test
+
 Problem statements:
 1) feature extraction algorithm
 2) how nltk.classify.apply_features is working and what is the output
