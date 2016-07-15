@@ -1,3 +1,4 @@
+12 th July
 Imagine there are 100 positive cases among 10,000 cases.
 You want to predict which ones are positive
 you pick 200 to have a better chance of catching many of the 100 positive cases
@@ -25,7 +26,21 @@ the "precision" was 60 out of 200 = 30%
 
 
 70% for the training set and 30% for the test
-
+----------------------------------------------------------------------------------
+13 th July
 Problem statements:
 1) feature extraction algorithm
 2) how nltk.classify.apply_features is working and what is the output
+
+----------------------------------------------------------------------------------
+15 th July
+traindata in init, possible ways to improve:
+1) do online survey, get feedback on the output //feedback
+2) use published dictionary, like 
+http://sentic.net/downloads/
+http://sentiwordnet.isti.cnr.it/
+3) how you are doing feature extraction.(algo - frequency,)
+4) postive and negative score
+5) not only positive, negative add more options like neutral and not_understand
+----------------------------------------------------------------------------------
+

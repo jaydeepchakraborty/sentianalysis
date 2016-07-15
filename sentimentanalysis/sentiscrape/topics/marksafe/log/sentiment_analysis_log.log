@@ -1,0 +1,28 @@
+start calling mainMtdh method
+populateStopWords method :- 0.0012218952178955078 seconds
+init train data length:- 299
+populateInitTrainSet method :- 0.0005879402160644531 seconds
+init test data length:- 8291
+populateInitTestingSet method :- 0.016731977462768555 seconds
+feature data length:- 307
+populateFeatureWords method :- 0.0030889511108398438 seconds
+feature data length:- 271
+get_word_features method :- 0.0002570152282714844 seconds
+init nltk.classify.apply_features :- 1.3828277587890625e-05 seconds
+init nltk.NaiveBayesClassifier.train :- 0.11181092262268066 seconds
+testInitData method :- 12.681744813919067 seconds
+init positive data  :- 7142
+init negative data  :- 1149
+updateData method :- 0.06177687644958496 seconds
+writeResult method :- 0.019118785858154297 seconds
+Sample val:- 1
+train data length:- 6634
+populateTrainSet method :- 0.03040313720703125 seconds
+test data length:- 1657
+populateTestingSet method :- 0.003484010696411133 seconds
+feature data length:- 53806
+populateFeatureWords method :- 0.6923360824584961 seconds
+feature data length:- 19864
+get_word_features method :- 0.01477503776550293 seconds
+sample1 nltk.classify.apply_features :- 0.0001220703125 seconds
+sample1 nltk.NaiveBayesClassifier.train :- 320.8420259952545 seconds
