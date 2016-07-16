@@ -1,28 +1,50 @@
 start calling mainMtdh method
-populateStopWords method :- 0.0030002593994140625 seconds
+populateStopWords method :- 0.0013148784637451172 seconds
 init train data length:- 299
-populateInitTrainSet method :- 0.0010001659393310547 seconds
+populateInitTrainSet method :- 0.0006070137023925781 seconds
 init test data length:- 8291
-populateInitTestingSet method :- 0.03000164031982422 seconds
+populateInitTestingSet method :- 0.01616215705871582 seconds
 feature data length:- 307
-populateFeatureWords method :- 0.0030002593994140625 seconds
+populateFeatureWords method :- 0.0024590492248535156 seconds
 feature data length:- 271
-get_word_features method :- 0.0009999275207519531 seconds
-init nltk.classify.apply_features :- 0.0 seconds
-init nltk.NaiveBayesClassifier.train :- 0.18801093101501465 seconds
-testInitData method :- 18.53406000137329 seconds
+get_word_features method :- 0.00023984909057617188 seconds
+init nltk.classify.apply_features :- 1.2874603271484375e-05 seconds
+init nltk.NaiveBayesClassifier.train :- 0.11146783828735352 seconds
+testInitData method :- 10.75053596496582 seconds
 init positive data  :- 7142
 init negative data  :- 1149
-updateData method :- 0.1370079517364502 seconds
-writeResult method :- 0.04800271987915039 seconds
+updateData method :- 0.07735896110534668 seconds
+writeResult method :- 0.026452064514160156 seconds
 Sample val:- 1
 train data length:- 6634
-populateTrainSet method :- 0.05300307273864746 seconds
+populateTrainSet method :- 0.02462005615234375 seconds
 test data length:- 1657
-populateTestingSet method :- 0.0030002593994140625 seconds
+populateTestingSet method :- 0.0019888877868652344 seconds
 feature data length:- 53806
-populateFeatureWords method :- 0.9090521335601807 seconds
+populateFeatureWords method :- 0.7372360229492188 seconds
 feature data length:- 19864
-get_word_features method :- 0.012000560760498047 seconds
-sample1 train nltk.classify.apply_features :- 0.0 seconds
-sample1 nltk.NaiveBayesClassifier.train :- 406.28523802757263 seconds
+get_word_features method :- 0.018054962158203125 seconds
+sample1 train nltk.classify.apply_features :- 0.00015401840209960938 seconds
+sample1 nltk.NaiveBayesClassifier.train :- 398.67811703681946 seconds
+testData method :- 350.1991591453552 seconds
+positive data  :- 1585
+negative data  :- 72
+sample1 output nltk.classify.apply_features :- 2.9087066650390625e-05 seconds
+pos precision:0.8927444794952681
+pos recall:0.9908963585434174
+pos F-measure:0.9392631928310655
+neg precision:0.8194444444444444
+neg recall:0.2576419213973799
+neg F-measure:0.39202657807308966
+accuracy 100.0
+time to calculate precision and recal for sample 1373.11543798446655 seconds
+Sample val:- 2
+train data length:- 6634
+populateTrainSet method :- 0.031432151794433594 seconds
+test data length:- 1657
+populateTestingSet method :- 0.002190113067626953 seconds
+feature data length:- 55619
+populateFeatureWords method :- 0.7096128463745117 seconds
+feature data length:- 20591
+get_word_features method :- 0.008677005767822266 seconds
+sample2 train nltk.classify.apply_features :- 0.004022121429443359 seconds

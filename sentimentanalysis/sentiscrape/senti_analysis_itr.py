@@ -184,6 +184,7 @@ def testData(classifier, test_mark_safe, stop_words,word_features,root_logger):
         return features
     
     outsets = defaultdict(set)
+    out_mark_safe = []
     i = 0
     for test_post in test_mark_safe:
             refined_test_post_lst = [w for w in test_post.split() if not w.lower() in stop_words]
@@ -193,12 +194,13 @@ def testData(classifier, test_mark_safe, stop_words,word_features,root_logger):
             elif(senti_result == "negative"):
                 neg_results.append((test_post, senti_result))
             
+            out_mark_safe.append((test_post.split(), senti_result))
             outsets[senti_result].add(i)
             i = i+1
     root_logger.debug("testData method :- "+str((time.time() - start_time)) + " seconds") 
     root_logger.debug("positive data  :- "+str(len(pos_results)))
     root_logger.debug("negative data  :- "+str(len(neg_results)))       
-    return pos_results, neg_results, outsets
+    return pos_results, neg_results, outsets, out_mark_safe
 
 def updateData(pos_results , neg_results,root_logger):
     start_time = time.time()
@@ -332,13 +334,7 @@ def mainMtdh():
             start_time = time.time()
             classifier = nltk.NaiveBayesClassifier.train(training_set)
             root_logger.debug("sample"+str(sample_val)+" nltk.NaiveBayesClassifier.train :- "+str((time.time() - start_time)) + " seconds")
-           
-            pos_results ,neg_results, outsets = testData(classifier,test_mark_safe,stop_words,word_features,root_logger)
-            print(outsets)
-            start_time = time.time()
-            testing_set = nltk.classify.apply_features(extract_features, outsets)
-            root_logger.debug("sample"+str(sample_val)+" test nltk.classify.apply_features :- "+str((time.time() - start_time)) + " seconds")
-            print(testing_set)
+            pos_results ,neg_results, outsets , out_mark_safe = testData(classifier,test_mark_safe,stop_words,word_features,root_logger)
             refsets = defaultdict(set)
             with open(ref_file_name+str(sample_val)+".txt", "r", encoding='utf-8') as f:
                 i = 0
@@ -348,13 +344,17 @@ def mainMtdh():
             f.close() 
             
             start_time = time.time()
+            out_set = nltk.classify.apply_features(extract_features, out_mark_safe)
+            root_logger.debug("sample"+str(sample_val)+" output nltk.classify.apply_features :- "+str((time.time() - start_time)) + " seconds")
+            
+            start_time = time.time()
             pos_precision = precision(refsets['positive'], outsets['positive'])
             pos_recall = recall(refsets['positive'], outsets['positive'])
             pos_fmeasure = f_measure(refsets['positive'], outsets['positive'])
             neg_precision = precision(refsets['negative'], outsets['negative'])
             neg_recall = recall(refsets['negative'], outsets['negative'])
             neg_fmeasure = f_measure(refsets['negative'], outsets['negative'])
-            accuracy = nltk.classify.accuracy(classifier,testing_set)*100
+            accuracy = nltk.classify.accuracy(classifier,out_set)*100
             
             root_logger.debug('pos precision:' +str(pos_precision))
             root_logger.debug('pos recall:'+ str(pos_recall))
