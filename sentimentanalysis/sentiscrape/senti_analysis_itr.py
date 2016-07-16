@@ -324,18 +324,21 @@ def mainMtdh():
             #         print(len(word_features))
                     for word in word_features:
                         features['contains(%s)' % word] = (word in document_words)
-                       
                     return features
             ##from train_mark_safe create training_set to train the model
             start_time = time.time()
             training_set = nltk.classify.apply_features(extract_features, train_mark_safe)
-            root_logger.debug("sample"+str(sample_val)+" nltk.classify.apply_features :- "+str((time.time() - start_time)) + " seconds")
+            root_logger.debug("sample"+str(sample_val)+" train nltk.classify.apply_features :- "+str((time.time() - start_time)) + " seconds")
             start_time = time.time()
             classifier = nltk.NaiveBayesClassifier.train(training_set)
             root_logger.debug("sample"+str(sample_val)+" nltk.NaiveBayesClassifier.train :- "+str((time.time() - start_time)) + " seconds")
            
             pos_results ,neg_results, outsets = testData(classifier,test_mark_safe,stop_words,word_features,root_logger)
-             
+            print(outsets)
+            start_time = time.time()
+            testing_set = nltk.classify.apply_features(extract_features, outsets)
+            root_logger.debug("sample"+str(sample_val)+" test nltk.classify.apply_features :- "+str((time.time() - start_time)) + " seconds")
+            print(testing_set)
             refsets = defaultdict(set)
             with open(ref_file_name+str(sample_val)+".txt", "r", encoding='utf-8') as f:
                 i = 0
@@ -351,7 +354,7 @@ def mainMtdh():
             neg_precision = precision(refsets['negative'], outsets['negative'])
             neg_recall = recall(refsets['negative'], outsets['negative'])
             neg_fmeasure = f_measure(refsets['negative'], outsets['negative'])
-            accuracy = nltk.classify.accuracy(classifier,training_set)*100
+            accuracy = nltk.classify.accuracy(classifier,testing_set)*100
             
             root_logger.debug('pos precision:' +str(pos_precision))
             root_logger.debug('pos recall:'+ str(pos_recall))

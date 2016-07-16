@@ -225,6 +225,8 @@ for i, (feats, label) in enumerate(test_tweets):
     testsets[observed].add(i)
 
 testing_set = nltk.classify.apply_features(extract_features, test_tweets)
+print("testing set")
+print(testing_set)
 from nltk.metrics.scores import precision,recall,f_measure
 
 print(refsets['positive'])
