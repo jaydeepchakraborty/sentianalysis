@@ -345,14 +345,22 @@ def mainMtdh():
             f.close() 
             
             start_time = time.time()
-            root_logger.debug('pos precision:', precision(refsets['positive'], outsets['positive']))
-            root_logger.debug('pos recall:', recall(refsets['positive'], outsets['positive']))
-            root_logger.debug('pos F-measure:', f_measure(refsets['positive'], outsets['positive']))
-            root_logger.debug('neg precision:', precision(refsets['negative'], outsets['negative']))
-            root_logger.debug('neg recall:', recall(refsets['negative'], outsets['negative']))
-            root_logger.debug('neg F-measure:', f_measure(refsets['negative'], outsets['negative']))
+            pos_precision = precision(refsets['positive'], outsets['positive'])
+            pos_recall = recall(refsets['positive'], outsets['positive'])
+            pos_fmeasure = f_measure(refsets['positive'], outsets['positive'])
+            neg_precision = precision(refsets['negative'], outsets['negative'])
+            neg_recall = recall(refsets['negative'], outsets['negative'])
+            neg_fmeasure = f_measure(refsets['negative'], outsets['negative'])
+            accuracy = nltk.classify.accuracy(classifier,training_set)*100
             
-            root_logger.debug('accuracy ', nltk.classify.accuracy(classifier,training_set)*100) 
+            root_logger.debug('pos precision:' +str(pos_precision))
+            root_logger.debug('pos recall:'+ str(pos_recall))
+            root_logger.debug('pos F-measure:'+ str(pos_fmeasure))
+            root_logger.debug('neg precision:'+ str(neg_precision))
+            root_logger.debug('neg recall:'+ str(neg_recall))
+            root_logger.debug('neg F-measure:'+str(neg_fmeasure))
+            
+            root_logger.debug('accuracy '+ str(accuracy)) 
             root_logger.debug("time to calculate precision and recal for sample "+str(sample_val)+str((time.time() - start_time)) + " seconds") 
         #code for iteration 2 for sample1,2,3,4,5 end--------------------------------------------------------------------------    
     except Exception as e:

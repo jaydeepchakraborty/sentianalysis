@@ -1,28 +1,49 @@
 start calling mainMtdh method
-populateStopWords method :- 0.0012218952178955078 seconds
+populateStopWords method :- 0.07300424575805664 seconds
 init train data length:- 299
-populateInitTrainSet method :- 0.0005879402160644531 seconds
+populateInitTrainSet method :- 0.020000934600830078 seconds
 init test data length:- 8291
-populateInitTestingSet method :- 0.016731977462768555 seconds
+populateInitTestingSet method :- 0.05100297927856445 seconds
 feature data length:- 307
-populateFeatureWords method :- 0.0030889511108398438 seconds
+populateFeatureWords method :- 0.003000020980834961 seconds
 feature data length:- 271
-get_word_features method :- 0.0002570152282714844 seconds
-init nltk.classify.apply_features :- 1.3828277587890625e-05 seconds
-init nltk.NaiveBayesClassifier.train :- 0.11181092262268066 seconds
-testInitData method :- 12.681744813919067 seconds
+get_word_features method :- 0.0010001659393310547 seconds
+init nltk.classify.apply_features :- 0.0 seconds
+init nltk.NaiveBayesClassifier.train :- 0.19001078605651855 seconds
+testInitData method :- 19.38110852241516 seconds
 init positive data  :- 7142
 init negative data  :- 1149
-updateData method :- 0.06177687644958496 seconds
-writeResult method :- 0.019118785858154297 seconds
+updateData method :- 0.12900733947753906 seconds
+writeResult method :- 0.07700443267822266 seconds
 Sample val:- 1
 train data length:- 6634
-populateTrainSet method :- 0.03040313720703125 seconds
+populateTrainSet method :- 0.05100297927856445 seconds
 test data length:- 1657
-populateTestingSet method :- 0.003484010696411133 seconds
+populateTestingSet method :- 0.00500035285949707 seconds
 feature data length:- 53806
-populateFeatureWords method :- 0.6923360824584961 seconds
+populateFeatureWords method :- 0.9190526008605957 seconds
 feature data length:- 19864
-get_word_features method :- 0.01477503776550293 seconds
-sample1 nltk.classify.apply_features :- 0.0001220703125 seconds
-sample1 nltk.NaiveBayesClassifier.train :- 320.8420259952545 seconds
+get_word_features method :- 0.017000913619995117 seconds
+sample1 nltk.classify.apply_features :- 0.0 seconds
+sample1 nltk.NaiveBayesClassifier.train :- 415.7297785282135 seconds
+testData method :- 349.37198281288147 seconds
+positive data  :- 1585
+negative data  :- 72
+error:- -------------------------------------
+
+Traceback (most recent call last):
+  File "E:\WorkSpace\sentianalysis\sentimentanalysis\sentiscrape\senti_analysis_itr.py", line 354, in mainMtdh
+    accuracy = nltk.classify.accuracy(classifier,training_set)*100
+  File "C:\Program Files\Python\lib\site-packages\nltk\classify\util.py", line 87, in accuracy
+    results = classifier.classify_many([fs for (fs, l) in gold])
+  File "C:\Program Files\Python\lib\site-packages\nltk\classify\util.py", line 87, in <listcomp>
+    results = classifier.classify_many([fs for (fs, l) in gold])
+  File "C:\Program Files\Python\lib\site-packages\nltk\util.py", line 946, in iterate_from
+    try: yield self._func(self._lists[0][index])
+  File "C:\Program Files\Python\lib\site-packages\nltk\classify\util.py", line 65, in lazy_func
+    return (feature_func(labeled_token[0]), labeled_token[1])
+  File "E:\WorkSpace\sentianalysis\sentimentanalysis\sentiscrape\senti_analysis_itr.py", line 326, in extract_features
+    features['contains(%s)' % word] = (word in document_words)
+MemoryError
+total time :- 946.4291326999664 seconds
+end calling mainMtdh method
