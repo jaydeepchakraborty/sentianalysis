@@ -1,14 +1,14 @@
 # not working
 
 #pip3 install vaderSentiment
-file = open("twitter_posts.txt", 'rt', encoding='latin1')
+file = open("topics/marksafe/twitter_posts_init_train.txt", 'rt', encoding='latin1')
 sentences = [file.read()]
 
         
 import nltk
 stoplist = []
 stoplist = nltk.corpus.stopwords.words('english')
-f = open('stopword','rt', encoding='latin1')
+f = open('topics/marksafe/stopword','rt', encoding='latin1')
 for word in f.read().split():
     stoplist.append(word)        
 
