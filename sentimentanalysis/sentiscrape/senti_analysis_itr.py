@@ -5,6 +5,7 @@ import logging
 import sys
 from nltk.corpus import stopwords
 from nltk.metrics.scores import precision, recall, f_measure
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 
 # #reading positive and negative mark_safe statements
@@ -146,6 +147,7 @@ def testInitData(classifier, test_mark_safe, stop_words,word_features,root_logge
     start_time = time.time()
     pos_results = []
     neg_results = []
+    polarity_results = []
     
     def extract_features(document):
         document_words = set(document)
@@ -155,10 +157,13 @@ def testInitData(classifier, test_mark_safe, stop_words,word_features,root_logge
             features['contains(%s)' % word] = (word in document_words)
             
         return features
-    
+    polarity_analyzer = SentimentIntensityAnalyzer()
     for test_post in test_mark_safe:
             refined_test_post_lst = [w for w in test_post.split() if not w.lower() in stop_words]
             senti_result = classifier.classify(extract_features(refined_test_post_lst))
+            refined_test_post_str = " ".join(refined_test_post_lst)
+            polarity_score = polarity_analyzer.polarity_scores(refined_test_post_str)
+            polarity_results.append((test_post, senti_result, str(polarity_score)))
             if(senti_result == "positive"):
                 pos_results.append((test_post, senti_result))
             elif(senti_result == "negative"):
@@ -167,7 +172,7 @@ def testInitData(classifier, test_mark_safe, stop_words,word_features,root_logge
     root_logger.debug("testInitData method :- "+str((time.time() - start_time)) + " seconds")
     root_logger.debug("init positive data  :- "+str(len(pos_results)))
     root_logger.debug("init negative data  :- "+str(len(neg_results)))
-    return pos_results, neg_results
+    return pos_results, neg_results, polarity_results
 
 def testData(classifier, test_mark_safe, stop_words,word_features,root_logger):
     start_time = time.time()
@@ -253,15 +258,11 @@ def updateData(pos_results , neg_results,root_logger):
         neg_train_file.close()
     root_logger.debug("updateData method :- "+str((time.time() - start_time)) + " seconds") 
 
-def writeResult(pos_results , neg_results, root_logger):
+def writeResult(polarity_results, root_logger):
     start_time = time.time()
     file = open(result_init, "w", encoding='utf-8')
     
-    for result in pos_results:
-        file.write(str(result))
-        file.write("\n")
-        file.write("--------------------------------------------------------------------------------------------\n")
-    for result in neg_results:
+    for result in polarity_results:
         file.write(str(result))
         file.write("\n")
         file.write("--------------------------------------------------------------------------------------------\n")
@@ -276,6 +277,7 @@ def mainMtdh():
     handler.setFormatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s') 
     root_logger.addHandler(handler)
     root_logger.debug('start calling mainMtdh method')
+    root_logger.debug('---------------------INIT STARTED----------------------------')
     main_mtdh_start_time = time.time()
     try:
         stop_words = populateStopWords(root_logger)
@@ -303,18 +305,19 @@ def mainMtdh():
         classifier = nltk.NaiveBayesClassifier.train(training_set)
         root_logger.debug("init nltk.NaiveBayesClassifier.train :- "+str((time.time() - start_time)) + " seconds")
              
-        pos_results , neg_results = testInitData(classifier, test_mark_safe, stop_words, word_features,root_logger)
+        pos_results , neg_results, polarity_results = testInitData(classifier, test_mark_safe, stop_words, word_features,root_logger)
                  
         updateData(pos_results , neg_results,root_logger)
         
-        writeResult(pos_results , neg_results,root_logger) #just to store the result
+        writeResult(polarity_results,root_logger) #just to store the result
         ##code for init  end--------------------------------------------------------------------------    
         
-        
+        root_logger.debug('---------------------INIT FINISHED----------------------------')
         
         #code for iteration 2 for sample1,2,3,4,5 start-------------------------------------------------------------------------- 
         for sample_val in range(1,6):
-            root_logger.debug("Sample val:- "+ str(sample_val))
+            root_logger.debug('\n')
+            root_logger.debug('---------------------SAMPLE_'+str(sample_val)+' STARTED----------------------------')
             train_mark_safe = populateTrainSet(str(sample_val),root_logger)# populating train_mark_safe[]
             test_mark_safe = populateTestingSet(str(sample_val),root_logger)# populating test_mark_safe[]
             all_feature_words = populateFeatureWords(train_mark_safe,stop_words,root_logger)# populating all_feature_words[]
@@ -365,6 +368,7 @@ def mainMtdh():
             
             root_logger.debug('accuracy '+ str(accuracy)) 
             root_logger.debug("time to calculate precision and recal for sample "+str(sample_val)+str((time.time() - start_time)) + " seconds") 
+            root_logger.debug('---------------------SAMPLE_'+str(sample_val)+' FINISHED----------------------------')
         #code for iteration 2 for sample1,2,3,4,5 end--------------------------------------------------------------------------    
     except Exception as e:
             root_logger.debug("error:- -------------------------------------")

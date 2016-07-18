@@ -1,11 +1,12 @@
 # not working
-
+#http://dev.panlex.org/db/panlex_lite.zip
 #pip3 install vaderSentiment
 file = open("topics/marksafe/twitter_posts_init_train.txt", 'rt', encoding='latin1')
 sentences = [file.read()]
 
         
 import nltk
+# nltk.download()
 stoplist = []
 stoplist = nltk.corpus.stopwords.words('english')
 f = open('topics/marksafe/stopword','rt', encoding='latin1')
@@ -38,4 +39,4 @@ for sentence in testData:
     ss = sid.polarity_scores(sentence)
     for k in sorted(ss):
         print('{0}: {1}, '.format(k, ss[k]), end='')
-        print()
+        print("-------------------------------------")
