@@ -50,3 +50,4 @@ http://sentic.net/downloads/
 http://sentiwordnet.isti.cnr.it/
 3) validation of current accuracy, precision, recall, and f-measure
 
+https://www.kaggle.com/katarz/d/kaggle/hillary-clinton-emails/sentiment/run/211290
