@@ -43,4 +43,10 @@ http://sentiwordnet.isti.cnr.it/
 4) postive and negative score
 5) not only positive, negative add more options like neutral and not_understand
 ----------------------------------------------------------------------------------
+17th July
+1) do online survey, get feedback on the output //feedback
+2) use published dictionary, like 
+http://sentic.net/downloads/
+http://sentiwordnet.isti.cnr.it/
+3) validation of current accuracy, precision, recall, and f-measure
 
