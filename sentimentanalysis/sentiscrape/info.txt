@@ -51,3 +51,19 @@ http://sentiwordnet.isti.cnr.it/
 3) validation of current accuracy, precision, recall, and f-measure
 
 https://www.kaggle.com/katarz/d/kaggle/hillary-clinton-emails/sentiment/run/211290
+
+4) add "neutral" class in training data
+sentiment dictionaries :
+SentiWordNet			http://sentiwordnet.isti.cnr.it
+Hu and Liu's lexicon	https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html
+Sentiment lexicon		http://mpqa.cs.pitt.edu/
+General inquirer		http://www.wjh.harvard.edu/~inquirer/homecat.htm
+Vader sentiment			https://github.com/cjhutto/vaderSentiment/blob/master/vaderSentiment/vader_sentiment_lexicon.txt
+Sentic net				http://sentic.net/
+AFINN					http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010
+JeffryBreen				https://github.com/jeffreybreen/twitter-sentiment-analysis-tutorial-201107/blob/master/data/opinion-lexicon-English
+List of negative words	http://dreference.blogspot.com/2010/05/negative-ve-words-adjectives-list-for.html
+LIWC(not free)			http://liwc.wpengine.com/
+
+A way of defining this "strength" could be using two new dictionaries. One for "incrementers" and another for "decrementers"
+http://fjavieralba.com/basic-sentiment-analysis-with-python.html
