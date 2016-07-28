@@ -2,10 +2,8 @@ from collections import defaultdict
 import nltk
 import time
 import logging
-import sys
 from nltk.corpus import stopwords
 from nltk.metrics.scores import precision, recall, f_measure
-from nltk.sentiment import SentimentIntensityAnalyzer
 
 
 # #reading positive and negative mark_safe statements
@@ -41,14 +39,12 @@ def populateInitTrainSet(root_logger):
         for line in f:
             line = line.replace('\n', '')
             train_mark_safe.append((line.split(), "positive"))
-    
     f.close()
         
     with open(neg_file_name, "r", encoding='utf-8') as f:
         for line in f:
             line = line.replace('\n', '')
             train_mark_safe.append((line.split(), "negative"))
-            
     f.close()
 #     shuffle(train_mark_safe)
     root_logger.debug("init train data length:- "+str(len(train_mark_safe)))
@@ -157,12 +153,13 @@ def testInitData(classifier, test_mark_safe, stop_words,word_features,root_logge
             features['contains(%s)' % word] = (word in document_words)
             
         return features
-    polarity_analyzer = SentimentIntensityAnalyzer()
     for test_post in test_mark_safe:
             refined_test_post_lst = [w for w in test_post.split() if not w.lower() in stop_words]
             senti_result = classifier.classify(extract_features(refined_test_post_lst))
-            refined_test_post_str = " ".join(refined_test_post_lst)
-            polarity_score = polarity_analyzer.polarity_scores(refined_test_post_str)
+            dist = classifier.prob_classify(extract_features(refined_test_post_lst))
+            polarity_score = []
+            for label in dist.samples():
+                polarity_score.append((label, dist.prob(label)))
             polarity_results.append((test_post, senti_result, str(polarity_score)))
             if(senti_result == "positive"):
                 pos_results.append((test_post, senti_result))
@@ -304,7 +301,6 @@ def mainMtdh():
         start_time = time.time()
         classifier = nltk.NaiveBayesClassifier.train(training_set)
         root_logger.debug("init nltk.NaiveBayesClassifier.train :- "+str((time.time() - start_time)) + " seconds")
-             
         pos_results , neg_results, polarity_results = testInitData(classifier, test_mark_safe, stop_words, word_features,root_logger)
                  
         updateData(pos_results , neg_results,root_logger)
